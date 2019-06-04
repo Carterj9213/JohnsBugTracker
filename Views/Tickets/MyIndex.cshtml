@@ -1,0 +1,151 @@
+﻿@using JohnsBugTracker.Helpers;
+
+@model IEnumerable<JohnsBugTracker.Models.Project>
+
+@{
+    ViewBag.Title = "My Index";
+}
+
+<!-- Exportable Table -->
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    MY PROJECTS:
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Developer</th>
+                                <th>Submitter</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Project</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Developer</th>
+                                <th>Submitter</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{
+                                var projectHelper = new ProjectHelper();
+                            }
+                            @foreach (var project in Model)
+                            {
+                                <tr>
+                                    <td>@project.Name</td>
+                                    <td>@project.Description</td>
+                                    <td>
+                                        @foreach (var user in projectHelper.UsersOnProjectInRole(project.Id, "ProjectManager"))
+                                        {
+                                            @user.FullName <br />
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var user in projectHelper.UsersOnProjectInRole(project.Id, "Developer"))
+                                        {
+                                            @user.FullName <br />
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var user in projectHelper.UsersOnProjectInRole(project.Id, "Submitter"))
+                                        {
+                                            @user.FullName <br />
+                                        }
+                                    </td>
+                                    <td>
+                                        @*@Html.ActionLink("Details", "Details", new { id = project.Id }) |*@
+                                        @if (User.IsInRole("Submitter"))
+                                        {
+                                            @Html.ActionLink("Create", "Create", "Tickets", new { id = project.Id }, null)
+                                        }
+
+                                        @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))
+                                        {
+                                            @Html.ActionLink("Edit", "Edit", new { id = project.Id }, null) @:|
+                                            @Html.ActionLink("Details", "Details", new { id = project.Id }, null)
+
+
+                                        }
+
+
+
+
+
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@

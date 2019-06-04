@@ -1,0 +1,47 @@
+﻿<head>
+
+    <link href="~/Content/headercustom.css" rel="stylesheet" />
+
+</head>
+    
+<body>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>Selected User:</h2>
+            <h3>@ViewBag.Email</h3>
+        </div>
+
+    </div><hr />
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class=" row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.Label("Roles", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Roles", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+        </div><br />
+
+        <div class="row">
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary">Assign</button>
+            </div>
+        </div><br />
+
+        <p>@Html.ActionLink("Back to List", "UserIndex", "Admin")</p>
+    }
+
+
+
+</body>
+
+
+

@@ -1,0 +1,159 @@
+﻿@using JohnsBugTracker.Helpers
+
+@model JohnsBugTracker.Models.Ticket
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+  
+    <div class="block-header">
+        <!-- Vertical Layout -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Ticket Edit:
+                        </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.HiddenFor(model => model.OwnerUserId)
+                            @Html.AntiForgeryToken()
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control show-tick" } })
+                                </div>
+
+                            </div>
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control show-tick" } })
+                                </div>
+
+                            </div>
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control show-tick" } })
+                                </div>
+
+                            </div>
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.Updated, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Updated, new { htmlAttributes = new { @class = "form-control show-tick" } })
+                                </div>
+
+                            </div>
+
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.ProjectId, "ProjectId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control show-tick" })
+                                </div>
+
+                            </div>
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.TicketTypeId, "TicketTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("TicketTypeId", null, htmlAttributes: new { @class = "form-control show-tick" })
+                                </div>
+
+                            </div>
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.TicketPriorityId, "Ticket Priority", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("TicketPriorityId", null, htmlAttributes: new { @class = "form-control show-tick" })
+                                </div>
+
+                            </div>
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.TicketStatusId, "Ticket Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control show-tick" })
+                                </div>
+
+                            </div>
+                            @*<div class="row clearfix">
+                @Html.LabelFor(model => model.OwnerUserId, "OwnerUserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OwnerUserId", null, htmlAttributes: new { @class = "form-control show-tick" })
+                </div>
+
+            </div>*@
+                            <div class="row clearfix">
+                                @Html.LabelFor(model => model.AssignedToUserId, "Assigned Developer", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control show-tick" })
+                                </div>
+
+                            </div>
+
+                            <div class="row clearfix">
+
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
+
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Vertical Layout -->
+
+    </div>
+       
+
+@*<h2>Edit</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Ticket</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

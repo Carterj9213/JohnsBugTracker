@@ -1,0 +1,134 @@
+﻿@model JohnsBugTracker.Models.UserViewModel
+
+
+<div class="col-xs-12 col-sm-9">
+    <div class="card">
+        <div class="body">
+            <div>
+                <ul class="nav nav-tabs" role="tablist">
+                    @*<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>*@
+                    <li role="presentation" class="active"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>
+                    <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Change Password</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
+                        @using (Html.BeginForm("EditProfile", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+
+                            <div class="form-horizontal">
+
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.ProfilePic)
+                                @Html.HiddenFor(model => model.Id)
+
+                                <div class="form-group">
+                                    <label for="First Name" class="col-sm-2 control-label">First Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="FirstName" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Last Name" class="col-sm-2 control-label">Last Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-line">
+                                            <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="form-group">
+                                        <label for="InputExperience" class="col-sm-2 control-label">Experience</label>
+
+                                        <div class="col-sm-10">
+                                            <div class="form-line">
+                                                <textarea class="form-control" id="InputExperience" name="InputExperience" rows="3" placeholder="Experience"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                @*<div class="form-group">
+                                        <label for="InputSkills" class="col-sm-2 control-label">Skills</label>
+
+                                        <div class="col-sm-10">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" id="InputSkills" name="InputSkills" placeholder="Skills">
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                @*<div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <input type="checkbox" id="terms_condition_check" class="chk-col-red filled-in" />
+                                            <label for="terms_condition_check">I agree to the <a href="#">terms and conditions</a></label>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                        @using (Html.BeginForm("ChangePassword", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="OldPassword" class="col-sm-3 control-label">Old Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" name="OldPassword" placeholder="Old Password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NewPassword" class="col-sm-3 control-label">New Password</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="password" class="form-control" name="NewPassword" placeholder="New Password" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NewPasswordConfirm" class="col-sm-3 control-label">New Password (Confirm)</label>
+                                        <div class="col-sm-9">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" name="ConfirmPassword" placeholder="New Password (Confirm)" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-3 col-sm-9">
+                                            <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,253 @@
+﻿@{ 
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "DemoLogin";
+}
+
+<h2>DemoLogin</h2>
+
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Profile | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="~/images/Webp.net-resizeimage.jpg" type="image/x-icon">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <!-- Waves Effect Css -->
+    <link href="~/Content/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="~/Content/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/Content/all-themes.css" rel="stylesheet" />
+
+    <link href="~/Content/Custom.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="card profile-card">
+                    <div class="profile-header">&nbsp;</div>
+                    <div class="profile-body">
+                        <div class="image-area">
+                            <!--2px, 2px-->
+                            @*<img src="~/images/user-lg.jpg" alt="AdminBSB - Profile Image" />*@
+                            <img src="~/Avatar/user.png" alt="AdminBSB - Profile Image" />
+                        </div>
+                        <div class="content-area">
+                            <h3>Administrator</h3>
+                            @*<p>Web Software Developer</p>
+                        <p>Administrator</p>*@
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        @*<ul>
+                        <li>
+                            <span>Followers</span>
+                            <span>hahaha</span>
+                        </li>
+                        <li>
+                            <span>Following</span>
+                            <span>1.201</span>
+                        </li>
+                        <li>
+                            <span>Friends</span>
+                            <span>14.252</span>
+                        </li>
+                    </ul>*@
+
+                        @using (Html.BeginForm("DemoLogin", "Account"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("demoUser", "DemoAdmin")
+                            <button type="submit" class="btn btn-primary btn-lg waves-effect btn-block">Login</button>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="card profile-card">
+                    <div class="profile-header">&nbsp;</div>
+                    <div class="profile-body">
+                        <div class="image-area">
+
+                            <img src="~/Avatar/user.png" alt="AdminBSB - Profile Image" />
+                        </div>
+                        <div class="content-area">
+                            <h3>Project Manager</h3>
+                            @*<p>Web Software Developer</p>
+                        <p>Project Manager</p>*@
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        <ul>
+                            @*<li>
+                            <span>Followers</span>
+                            <span>1.234</span>
+                        </li>
+                        <li>
+                            <span>Following</span>
+                            <span>1.201</span>
+                        </li>
+                        <li>
+                            <span>Friends</span>
+                            <span>14.252</span>
+                        </li>*@
+
+                        </ul>
+                        @using (Html.BeginForm("DemoLogin", "Account"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("demoUser", "DemoProjectManager")
+                            <button type="submit" class="btn btn-primary btn-lg waves-effect btn-block">Login</button>
+                        }
+                        @*<button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="card profile-card">
+                    <div class="profile-header">&nbsp;</div>
+                    <div class="profile-body">
+                        <div class="image-area">
+
+                            <img src="~/Avatar/user.png" alt="AdminBSB - Profile Image" />
+                        </div>
+                        <div class="content-area">
+                            <h3>Developer</h3>
+                            @*<p>Web Software Developer</p>
+                        <p>Developer</p>*@
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        <ul>
+                            @*<li>
+                            <span>Followers</span>
+                            <span>1.234</span>
+                        </li>
+                        <li>
+                            <span>Following</span>
+                            <span>1.201</span>
+                        </li>
+                        <li>
+                            <span>Friends</span>
+                            <span>14.252</span>
+                        </li>*@
+
+                        </ul>
+                        @using (Html.BeginForm("DemoLogin", "Account"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("demoUser", "DemoDeveloper")
+                            <button type="submit" class="btn btn-primary btn-lg waves-effect btn-block">Login</button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="card profile-card">
+                    <div class="profile-header">&nbsp;</div>
+                    <div class="profile-body">
+                        <div class="image-area">
+
+                            <img src="~/Avatar/user.png" alt="AdminBSB - Profile Image" />
+                        </div>
+                        <div class="content-area">
+                            <h3>Submitter</h3>
+                            @*<p>Web Software Developer</p>
+                        <p>Submitter</p>*@
+                        </div>
+                    </div>
+                    <div class="profile-footer">
+                        <ul>
+                            @*<li>
+                            <span>Followers</span>
+                            <span>1.234</span>
+                        </li>
+                        <li>
+                            <span>Following</span>
+                            <span>1.201</span>
+                        </li>
+                        <li>
+                            <span>Friends</span>
+                            <span>14.252</span>
+                        </li>*@
+
+                        </ul>
+                        @using (Html.BeginForm("DemoLogin", "Account"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("demoUser", "DemoSubmitter")
+                            <button type="submit" class="btn btn-primary btn-lg waves-effect btn-block">Login</button>
+                        }
+                        @*<button class="btn btn-primary btn-lg waves-effect btn-block">FOLLOW</button>*@
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            @Html.ActionLink("Want to Login?", "Login")
+
+
+        </div>
+
+    </div>
+    
+
+    
+    <!-- Jquery Core Js -->
+    <script src="~/Scripts/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="~/Scripts/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/Scripts/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/Scripts/waves.js"></script>
+
+    <!-- Custom Js -->
+    <script src="~/Scripts/admin.js"></script>
+    <script src="~/Scripts/profile.js"></script>
+    
+    <!-- Demo Js -->
+    <script src="~/Scripts/demo.js"></script>
+
+
+
+
+</body>
+
+
+</html>

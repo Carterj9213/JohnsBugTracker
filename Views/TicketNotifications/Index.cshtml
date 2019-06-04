@@ -1,0 +1,63 @@
+﻿@model IEnumerable<JohnsBugTracker.Models.TicketNotification>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<br />
+<h3>Unread Notifications = (@Model.Where(t => t.Unread).Count())</h3>
+
+<h3>read Notifications = (@Model.Where(t => !t.Unread).Count())</h3> 
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Recipient")
+        </th>
+        <th>
+
+            @Html.DisplayName("Unread")
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.NotificationBody)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) 
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                @{ 
+                    var unread = item.Unread ? "True" : "False";
+                }
+                @Html.Display(unread)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NotificationBody)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                @Html.ActionLink("Mark as read", "MarkasRead", new { id = item.Id })
+                <br />
+                @if (item.Unread)
+                {
+
+                }
+            </td>
+        </tr>
+    }
+
+</table>

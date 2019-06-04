@@ -1,0 +1,368 @@
+﻿@using JohnsBugTracker.Helpers
+
+
+@model JohnsBugTracker.Models.Ticket
+
+@{
+    ViewBag.Title = "Details";
+}
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="card card-about-me">
+                <div class="body">
+                    <div>
+                        <h4>Ticket</h4>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.AssignedToUser.FirstName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.AssignedToUser.FirstName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.OwnerUser.FirstName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.OwnerUser.FirstName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Project.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Project.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TicketPriority.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TicketPriority.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TicketStatus.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TicketStatus.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TicketType.Name)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.TicketType.Name)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Title)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Description)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Created)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Created)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Updated)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Updated)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("Back to List", "Index") |
+                        @Html.ActionLink("History", "Index", "TicketHistories", new { id = Model.Id }, null)
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+ 
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="body">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Comments</a></li>
+                            @*<li role="presentation"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>*@
+                            <li role="presentation"><a href="#change_password_settings" aria-controls="settings" role="tab" data-toggle="tab">Leave a Comment</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+
+
+
+
+                                @foreach (var comment in Model.TicketComments.OrderByDescending(c => c.Created))
+                                {
+                                    <div class="panel panel-default panel-post">
+                                        <div class="panel-heading">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img src="@RoleHelper.GetUserImage(comment.UserId)" />
+                                                    </a>
+                                                </div>
+
+
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">
+                                                        <a href="#"></a>
+                                                    </h4>
+                                                    @comment.Created.DateTime
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="panel-body">
+                                            <div class="post">
+                                                <div class="post-footer text-left">
+                                                    
+                                                </div><hr />
+                                               
+
+
+                                            </div>
+                                        </div>*@
+                                        <div class="panel-footer text-left">
+
+                                            @comment.CommentBody
+
+                                        </div>
+                                        <div>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                <div>
+                                                    @Html.ActionLink("Delete", "Delete", new { id = comment.Id })
+                                                </div>
+                                            }
+                                        </div>
+                                        
+
+                                    </div>
+
+                                 }
+
+
+                            </div>
+
+
+
+
+
+                            <div role="tabpanel" class="tab-pane fade in" id="change_password_settings">
+                                <div class="row">
+                                    @using (Html.BeginForm("Create", "TicketComments", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("TicketId", Model.Id)
+
+                                        <form class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <label for="InputExperience" class="col-sm-2 control-label">Add Comment:</label>
+
+                                                <div class="col-md-10">
+                                                    <div class="form-line">
+                                                        <textarea class="form-control" name="CommentBody" rows="3" placeholder="Comment"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-3 col-sm-9">
+                                                    <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    }
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="body">
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Attachments</a></li>
+                            @*<li role="presentation"><a href="#profile_settings" aria-controls="settings" role="tab" data-toggle="tab">Profile Settings</a></li>*@
+                            <li role="presentation"><a href="#Attachment" aria-controls="settings" role="tab" data-toggle="tab">Upload Attachment</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="home2">
+
+                                @foreach (var attachment in Model.TicketAttachments.OrderByDescending(c => c.Created))
+                                {
+                                    <div class="panel panel-default panel-post">
+                                        <div class="panel-heading">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img src="@RoleHelper.GetUserImage(attachment.UserId)" />
+                                                    </a>
+                                                </div>
+
+
+                                                <div class="media-body">
+                                                    <ul>
+                                                        
+                                                            @attachment.Created
+                                                      
+                                                    </ul>
+                                                    @*<h4 class="media-heading">
+                                                        <a href="#"></a>
+                                                    </h4>*@
+
+
+                                                    
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                            <div class="panel-body">
+                                                <div class="post">
+                                                    
+                                                        <a href=@Url.Content(attachment.FilePath) target="_blank">
+                                                            <img class="attachment" src="@AttachmentHelper.DisplayImage(attachment.FilePath)" />
+                                                        </a>
+                                                        
+                                                    
+                                                    
+                                                </div>
+                                            </div><hr />
+
+                                            <div class="panel-footer text-left">
+
+                                                Discription: @attachment.Description
+
+                                            </div>
+                                           
+
+
+                                     </div>
+                                       
+
+                                   
+
+
+                                }
+
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                            <div role="tabpanel" class="tab-pane fade in" id="Attachment">
+                                <div class="row">
+                                    @using (Html.BeginForm("Create", "TicketAttachments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("TicketId", Model.Id)
+
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+
+                                                <input name="attachment" type="file" class="form-control" id="fileUpload" />
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="InputExperience" class="col-sm-2 control-label">Add Comment:</label>
+
+                                                <div class="col-md-10">
+                                                    <div class="form-line">
+                                                        <textarea class="form-control" name="Description" rows="3" placeholder="Description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-offset-3 col-sm-9">
+                                                    <button type="submit" class="btn btn-danger">SUBMIT</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
+                                    }
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
